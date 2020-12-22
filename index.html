@@ -20,6 +20,7 @@
         <h3>How do you compare?</h3>
     </header>
     <!-- Form to get user input -->
+    
     <form id="dino-compare">
         <div class="form-container">
             <p>Name:</p>
@@ -30,16 +31,21 @@
             <p>Weight:</p>
             <label><input id="weight" class="form-field__full" type="number" name="weight">lbs</label>
             <p>Diet:</p>
+            
             <select id="diet" class="form-field__full" name="diet">
                 <option>Herbavor</option>
                 <option>Omnivor</option>
                 <option>Carnivor</option>
+                
             </select>
-            <div id="btn">Compare Me!</div>
+            <button type='submit'name='submit-btn' id='submit'> Compare Me</button>
         </div>
     </form>
     <!-- .grid to attach tiles to -->
-    <main id="grid"></main>
+    <main id="grid">
+
+        
+    </main>
     <footer>
         <!-- Include information source -->
         <p class="fine-print">Data Sourced from <a href="https://www.wikipedia.org/">Wikipedia.org</a>, all numbers are approximations.</p>
