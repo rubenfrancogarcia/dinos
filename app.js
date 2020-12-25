@@ -12,7 +12,6 @@
             
         }
     }
-
     //created human constructor 
 
     function Human (name,feet, inches, weight, diet){
@@ -26,8 +25,25 @@
     }
 
     // Create Dino Objects
+    let url = "http://localhost:5000/dino.json";
+    const dinos = [];
 
-    
+
+    function getDinoData(url){
+        fetch(url)
+        .then(response => response.json())
+        .then(data => {
+          
+            let dinoObj = data.Dinos; 
+            dinoObj.forEach(element => {
+                console.log(element)
+            });
+        })
+    }
+
+    function createDino(){
+        getDinoData(url);
+    }
 
     // Create Human Object
     // Use IIFE to get human data from form
@@ -78,3 +94,9 @@
 
 
 // On button click, prepare and display infographic
+
+
+//use npx serve in root folder to  be able to run fetch on json file
+
+
+
