@@ -26,24 +26,25 @@
 
     // Create Dino Objects
     let url = "http://localhost:5000/dino.json";
-    const dinos = [];
-
-
-    function getDinoData(url){
-        fetch(url)
-        .then(response => response.json())
-        .then(data => {
-          
-            let dinoObj = data.Dinos; 
-            dinoObj.forEach(element => {
-                console.log(element)
-            });
-        })
+    let dinosaurs;
+    function getDinoData(){
+     fetch("http://localhost:5000/dino.json")
+        .then(function(response){
+           return response.json()
+        })  
+        .then((data) => {
+             dinosaurs = data.Dinos.map((dino) => Dino(dino.species, dino.weight, dino.height, dino.diet, dino.where, dino.when, dino.fact) )
+      })  
     }
 
-    function createDino(){
-        getDinoData(url);
-    }
+
+
+     getDinoData();
+
+
+
+
+
 
     // Create Human Object
     // Use IIFE to get human data from form
