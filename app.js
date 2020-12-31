@@ -75,23 +75,27 @@
         console.log(h);
     }
 
-    const rSelectHelper = function(){
-        console.log('i am a helper')
-    }
+    const randomNumber = function getRandomInt(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min) + min); //The maximum is exclusive and the minimum is inclusive
+      }
 
-    const compareMethods = {
-        weight: function(){
-            if (human.weight > dino.weight){
-                return 'you weight more than this dinosaur'
-            }
-            if(human.weight < dino.weight){
-                return 'you weight less than this dinosaur'
-            }
-            else{
-                return 'you weight as much as this dinosaur'
-            }
+
+    const compareMethods = [
+        {weight:  function(a,b){
+                if (a, b){
+                    return 'you weight more than this dinosaur'
+                }
+                if(human.weight < dino.weight){
+                    return 'you weight less than this dinosaur'
+                }
+                else{
+                    return 'you weight as much as this dinosaur'
+                }
+              }
         },
-        height: function(){
+        {height: function(a,b){
             if (human.height > dino.height){
                 return 'you are taller than this dinosaur'
             }
@@ -101,11 +105,14 @@
             else{
                 return 'you are as tall as this dinosaur'
             }
-        },
-        diet: function(){
+         } 
+        }, 
+        {
+        diet: function(a,b){
             return (human.diet === dino.diet?  'you and dino have same diet': 'you have different diets')
+            }
         }
-    }
+    ]
     
     // Create Dino Compare Method 2
     // NOTE: Weight in JSON file is in lbs, height in inches.
