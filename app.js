@@ -27,7 +27,19 @@
     // Create Dino Objects
     let url = "http://localhost:5000/dino.json";
     let dinosaurs;
-    function getDinoData(){
+    
+    
+     async function getDinoData(url){
+        let res = await fetch(url);
+        let data = await res.json();
+        //console.log(data);
+        dinosaurs = data.Dinos.map(dino => Dino(dino.species, dino.weight, dino.height, dino.diet, dino.where, dino.when, dino.fact))
+        //console.log(dinosaurs); 
+       
+    }
+
+   
+    /*function getDinoData(){
      fetch("http://localhost:5000/dino.json")
         .then(function(response){
            return response.json()
@@ -36,22 +48,13 @@
              dinosaurs = data.Dinos.map((dino) => Dino(dino.species, dino.weight, dino.height, dino.diet, dino.where, dino.when, dino.fact) )
       })  
     }
+*/
 
-
-
-     getDinoData();
-
-
-
-
-
-
+     getDinoData(url);
     // Create Human Object
-    // Use IIFE to get human data from form
-
-//I couldn't declare variables within the function body of the event listerns and be able to use them in the return statement. why? 
-    const human = (function (){
+    // Use IIFE to get human data from form 
     let newHuman; 
+    const human = (function (){
     let name; 
     let feet;
     let inches;
@@ -68,12 +71,11 @@
         })
         return {
             getData: function(){
-          let newHuman = Human(name, feet, inches, weight, diet);
-          return newHuman;
+          newHuman = Human(name, feet, inches, weight, diet);
+          return newHuman
             }
         }
     })();
-
 
     // Create Dino Compare Method 1
     // NOTE: Weight in JSON file is in lbs, height in inches. 
