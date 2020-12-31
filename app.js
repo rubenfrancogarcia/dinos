@@ -1,14 +1,15 @@
 
     // Create Dino Constructor
-    function Dino (species, weight, height, diet, where, when, fact){
+    function Dino (species, weight, height, diet, where, when, fact, randomOutput){
         return {
             species:species,
             weight: weight, 
             height: height,
-            diet: diet, 
+            diet: diet.toLowerCase(),
             where: where,
             when: when,
-            fact: fact     
+            fact: fact, 
+            randomOutput: randomOutput     
         }
     }
     //created human constructor 
@@ -16,8 +17,8 @@
         return {
             name: name, 
             height: height,
-            weigth: weight,
-            diet: diet 
+            weight: weight,
+            diet: diet.toLowerCase()
         }
     }
 
@@ -29,7 +30,7 @@
         let res = await fetch(url);
         let data = await res.json();
         //console.log(data);
-        dinosaurs = data.Dinos.map(dino => Dino(dino.species, dino.weight, dino.height, dino.diet, dino.where, dino.when, dino.fact))
+        dinosaurs = data.Dinos.map(dino => Dino(dino.species, dino.weight, dino.height, dino.diet, dino.where, dino.when, dino.fact, dino.randomOutput))
         console.log(dinosaurs); 
     }
     getDinoData(url);
@@ -65,7 +66,6 @@
     })();
     //randomly select a compare method to output display to tiles; randomly select by array key
 
- 
 
     const randomNumber = function getRandomInt(min, max) {
         min = Math.ceil(min);
@@ -74,20 +74,18 @@
         return Math.floor(Math.random() * (max - min) + min); //The maximum is exclusive and the minimum is inclusive
       }
 
-   
-
 //compare methods, weight is in lbs, height in inches 
     const compareMethods = [
         {method: function(a,b){
-                if (a > b){
+                if (a.weight > b.weight){
                   
                     return 'you weight more than this dinosaur'
                 }
-                if(a < b){
+                if(a.weight < b.weight){
                     return 'you weight less than this dinosaur'
                 }
                 else{
-                    return 'you weight as much as this dinosaur'
+                    return 'you both weight the same'
                 
                 }
               }, 
@@ -95,10 +93,10 @@
               metric: "pounds"
         },
         {method: function(a,b){
-            if (a > b){
+            if (a.height > b.height){
                 return 'you are taller than this dinosaur'
             }
-            if(a < b){
+            if(a.height < b.height){
                 return 'you are shorter than this dinosaur'
             }
             else{
@@ -111,7 +109,7 @@
     
         {
         method: function(a,b){
-            return (a === b ?  'you and dino have same diet': 'you have different diets')
+            return (a.diet == b.diet ?  'you and dino have same diet': 'you have different diets')
             }, 
             type: 'diet'
         },   
@@ -120,7 +118,7 @@
     function compare(a, human){
          newTiles = a.map(function(dino){
             let rng = randomNumber(0, compareMethods.length);
-            let b = compareMethods[rng].method(human, dino);
+            let b = compareMethods[rng].method(dino, human);
             return b
         })
         console.log(newTiles)
@@ -132,7 +130,13 @@
             let tile = document.createElement('div');
             grid.appendChild(tile); 
             tile.textContent = text; 
+            tile.setAttribute('class', 'grid-item')
         })
+
+        const humanTile = document.createElement('div'); 
+        grid.appendChild(humanTile); 
+        humanTile.textContent = newHuman.name; 
+        humanTile.setAttribute('class', 'grid-item');
     }
 
 function hideForm(){
