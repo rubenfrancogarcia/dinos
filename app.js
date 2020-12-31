@@ -27,29 +27,15 @@
     // Create Dino Objects
     let url = "http://localhost:5000/dino.json";
     let dinosaurs;
+
     
-    
-     async function getDinoData(url){
+    async function getDinoData(url){
         let res = await fetch(url);
         let data = await res.json();
         //console.log(data);
         dinosaurs = data.Dinos.map(dino => Dino(dino.species, dino.weight, dino.height, dino.diet, dino.where, dino.when, dino.fact))
         //console.log(dinosaurs); 
-       
     }
-
-   
-    /*function getDinoData(){
-     fetch("http://localhost:5000/dino.json")
-        .then(function(response){
-           return response.json()
-        })  
-        .then((data) => {
-             dinosaurs = data.Dinos.map((dino) => Dino(dino.species, dino.weight, dino.height, dino.diet, dino.where, dino.when, dino.fact) )
-      })  
-    }
-*/
-
      getDinoData(url);
     // Create Human Object
     // Use IIFE to get human data from form 
@@ -76,10 +62,49 @@
             }
         }
     })();
+    //randomly select a compare method to output display to tiles; randomly select 
 
     // Create Dino Compare Method 1
     // NOTE: Weight in JSON file is in lbs, height in inches. 
     //logic when their diet matches each other and don't 
+    const compareHelper = function(method){
+        let h = human.getData(); 
+        let d = dinosaurs;
+        console.log(d);
+        console.log(h);
+    }
+
+    const rSelectHelper = function(){
+        console.log('i am a helper')
+    }
+
+    const compareMethods = {
+        weight: function(){
+            if (human.weight > dino.weight){
+                return 'you weight more than this dinosaur'
+            }
+            if(human.weight < dino.weight){
+                return 'you weight less than this dinosaur'
+            }
+            else{
+                return 'you weight as much as this dinosaur'
+            }
+        },
+        height: function(){
+            if (human.height > dino.height){
+                return 'you are taller than this dinosaur'
+            }
+            if(human.height < dino.height){
+                return 'you are shorter than this dinosaur'
+            }
+            else{
+                return 'you are as tall as this dinosaur'
+            }
+        },
+        diet: function(){
+            return (human.diet === dino.diet?  'you and dino have same diet': 'you have different diets')
+        }
+    }
     
     // Create Dino Compare Method 2
     // NOTE: Weight in JSON file is in lbs, height in inches.
