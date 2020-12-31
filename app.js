@@ -14,12 +14,11 @@
     }
     //created human constructor 
 
-    function Human (name,feet, inches, weight, diet){
+    function Human (name, height, weight, diet){
         return {
             name: name, 
-            feet: feet,
-            inches: inches, 
-            weight: weight, 
+            height: height,
+            weigth: weight,
             diet: diet 
         }
     }
@@ -45,19 +44,21 @@
     let feet;
     let inches;
     let weight; 
+    let height;
     let diet;
         document.getElementById('submit').addEventListener('click', function(event){
             event.preventDefault();
             const form = document.querySelector('form');
             name = form.elements.name.value; 
-            feet = form.elements.feet.value; 
-            inches = form.elements.inches.value;
-            weight = form.elements.weight.value; 
+            feet = Number(form.elements.feet.value); 
+            inches = Number(form.elements.inches.value);
+            weight = Number(form.elements.weight.value); 
             diet = form.elements.diet.value;
+            height = inches + (feet * 12);
         })
         return {
             getData: function(){
-          newHuman = Human(name, feet, inches, weight, diet);
+          newHuman = Human(name, height, weight, diet);
           return newHuman
             }
         }
