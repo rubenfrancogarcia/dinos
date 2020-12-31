@@ -125,6 +125,10 @@ p {
     margin: 0 auto;
 }
 
+.hidden {
+    display: none;
+}
+
 form p {
     margin-bottom: 0.3em;
     font-size: 1.3em;

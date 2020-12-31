@@ -8,12 +8,10 @@
             diet: diet, 
             where: where,
             when: when,
-            fact: fact
-            
+            fact: fact     
         }
     }
     //created human constructor 
-
     function Human (name, height, weight, diet){
         return {
             name: name, 
@@ -26,16 +24,16 @@
     // Create Dino Objects
     let url = "http://localhost:5000/dino.json";
     let dinosaurs;
-
     
     async function getDinoData(url){
         let res = await fetch(url);
         let data = await res.json();
         //console.log(data);
         dinosaurs = data.Dinos.map(dino => Dino(dino.species, dino.weight, dino.height, dino.diet, dino.where, dino.when, dino.fact))
-        //console.log(dinosaurs); 
+        console.log(dinosaurs); 
     }
-     getDinoData(url);
+    getDinoData(url);
+
     // Create Human Object
     // Use IIFE to get human data from form 
     let newHuman; 
@@ -59,15 +57,14 @@
         return {
             getData: function(){
           newHuman = Human(name, height, weight, diet);
+          console.log(newHuman);
           return newHuman
+            
             }
         }
     })();
-    //randomly select a compare method to output display to tiles; randomly select 
+    //randomly select a compare method to output display to tiles; randomly select by array key
 
-    // Create Dino Compare Method 1
-    // NOTE: Weight in JSON file is in lbs, height in inches. 
-    //logic when their diet matches each other and don't 
     const compareHelper = function(method){
         let h = human.getData(); 
         let d = dinosaurs;
@@ -78,49 +75,75 @@
     const randomNumber = function getRandomInt(min, max) {
         min = Math.ceil(min);
         max = Math.floor(max);
+        console.log(Math.floor(Math.random() * (max - min) + min))
         return Math.floor(Math.random() * (max - min) + min); //The maximum is exclusive and the minimum is inclusive
       }
 
+   
 
+//compare methods, weight is in lbs, height in inches 
     const compareMethods = [
-        {weight:  function(a,b){
-                if (a, b){
+        {method: function(a,b){
+                if (a > b){
+                  
                     return 'you weight more than this dinosaur'
                 }
-                if(human.weight < dino.weight){
+                if(a < b){
                     return 'you weight less than this dinosaur'
                 }
                 else{
                     return 'you weight as much as this dinosaur'
+                
                 }
-              }
+              }, 
+              type: "weight",
+              metric: "pounds"
         },
-        {height: function(a,b){
-            if (human.height > dino.height){
+        {method: function(a,b){
+            if (a > b){
                 return 'you are taller than this dinosaur'
             }
-            if(human.height < dino.height){
+            if(a < b){
                 return 'you are shorter than this dinosaur'
             }
             else{
                 return 'you are as tall as this dinosaur'
             }
-         } 
+         } ,
+         type: 'height',
+         metric: "inches"
         }, 
+    
         {
-        diet: function(a,b){
-            return (human.diet === dino.diet?  'you and dino have same diet': 'you have different diets')
-            }
-        }
+        method: function(a,b){
+            return (a === b ?  'you and dino have same diet': 'you have different diets')
+            }, 
+            type: 'diet'
+        },   
     ]
-    
-    // Create Dino Compare Method 2
-    // NOTE: Weight in JSON file is in lbs, height in inches.
-    //facts, open ended; if strings match, say  both ; if don't say both; submethods for specific details
-    
-    // Create Dino Compare Method 3
-    // NOTE: Weight in JSON file is in lbs, height in inches.
-    //comparing numeric values; a method for each type; sub-methdos for which is larger 
+    let newTiles; 
+    function compare(a, human){
+         newTiles = a.map(function(dino){
+            let rng = randomNumber(0, compareMethods.length);
+            let b = compareMethods[rng].method(human, dino);
+            return b
+        })
+        console.log(newTiles)
+    }
+
+    function generateTiles(a){
+        const grid = document.getElementById('grid'); 
+        a.forEach(function(text){
+            let tile = document.createElement('div');
+            grid.appendChild(tile); 
+            tile.textContent = text; 
+        })
+    }
+
+function hideForm(){
+    const form = document.querySelector('form');
+    form.setAttribute("class", "hidden");
+}    
 
     // Generate Tiles for each Dino in Array
   
@@ -130,9 +153,15 @@
 
 
 // On button click, prepare and display infographic
-
-
 //use npx serve in root folder to  be able to run fetch on json file
 
+document.getElementById('submit').addEventListener('click', function(event){
+    event.preventDefault();
+    human.getData();
+    compare(dinosaurs, newHuman);
+    generateTiles(newTiles); 
+    hideForm();
+
+})
 
 
