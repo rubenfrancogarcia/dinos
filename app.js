@@ -65,12 +65,7 @@
     })();
     //randomly select a compare method to output display to tiles; randomly select by array key
 
-    const compareHelper = function(method){
-        let h = human.getData(); 
-        let d = dinosaurs;
-        console.log(d);
-        console.log(h);
-    }
+ 
 
     const randomNumber = function getRandomInt(min, max) {
         min = Math.ceil(min);
