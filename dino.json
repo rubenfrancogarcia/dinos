@@ -8,7 +8,8 @@
             "where": "North America",
             "when": "Late Cretaceous",
             "fact": "First discovered in 1889 by Othniel Charles Marsh",
-            "randomoutput": true
+            "randomoutput": true,
+            "id": 0
         },
         {
             "species": "Tyrannosaurus Rex",
@@ -18,7 +19,8 @@
             "where": "North America",
             "when": "Late Cretaceous",
             "fact": "The largest known skull measures in at 5 feet long.",
-            "randomOutput": true
+            "randomOutput": true,
+            "id": 1
         },
         {
             "species": "Anklyosaurus",
@@ -28,7 +30,8 @@
             "where": "North America",
             "when": "Late Cretaceous",
             "fact": "Anklyosaurus survived for approximately 135 million years.",
-            "randomOutput": true
+            "randomOutput": true,
+            "id": 2
         },
         {
             "species": "Brachiosaurus",
@@ -38,7 +41,8 @@
             "where": "North America",
             "when": "Late Jurasic",
             "fact": "An asteroid was named 9954 Brachiosaurus in 1991.",
-            "randomOutput": true
+            "randomOutput": true,
+            "id": 3
         },
         {
             "species": "Stegosaurus",
@@ -48,7 +52,8 @@
             "where": "North America, Europe, Asia",
             "when": "Late Jurasic to Early Cretaceous",
             "fact": "The Stegosaurus had between 17 and 22 seperate places and flat spines.",
-            "randomOutput": true
+            "randomOutput": true,
+            "id": 4
         },
         {
             "species": "Elasmosaurus",
@@ -58,7 +63,8 @@
             "where": "North America",
             "when": "Late Cretaceous",
             "fact": "Elasmosaurus was a marine reptile first discovered in Kansas.",
-            "randomOutput": true
+            "randomOutput": true,
+            "id": 5
         },
         {
             "species": "Pteranodon",
@@ -68,7 +74,8 @@
             "where": "North America",
             "when": "Late Cretaceous",
             "fact": "Actually a flying reptile, the Pteranodon is not a dinosaur.",
-            "randomOutput": true
+            "randomOutput": true,
+            "id": 6
         },
         {
             "species": "Pigeon",
@@ -78,7 +85,8 @@
             "where": "World Wide",
             "when": "Holocene",
             "fact": "All birds are living dinosaurs.",
-            "randomOutput": false
+            "randomOutput": false,
+            "id": 7
         }
     ]
 }

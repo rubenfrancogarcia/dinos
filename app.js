@@ -1,6 +1,6 @@
 
     // Create Dino Constructor
-    function Dino (species, weight, height, diet, where, when, fact, randomOutput){
+    function Dino (species, weight, height, diet, where, when, fact, randomOutput, id){
         return {
             species:species,
             weight: weight, 
@@ -9,7 +9,8 @@
             where: where,
             when: when,
             fact: fact, 
-            randomOutput: randomOutput     
+            randomOutput: randomOutput,  
+            id: id   
         }
     }
     //created human constructor 
@@ -30,7 +31,7 @@
         let res = await fetch(url);
         let data = await res.json();
         //console.log(data);
-        dinosaurs = data.Dinos.map(dino => Dino(dino.species, dino.weight, dino.height, dino.diet, dino.where, dino.when, dino.fact, dino.randomOutput))
+        dinosaurs = data.Dinos.map(dino => Dino(dino.species, dino.weight, dino.height, dino.diet, dino.where, dino.when, dino.fact, dino.randomOutput, dino.id))
         //console.log(dinosaurs); 
     }
     getDinoData(url);
@@ -134,18 +135,28 @@
        // console.log(newTiles)
     }
 
-    function generateTiles(a){
+    function generateTiles(a, dinosaurs){
         const grid = document.getElementById('grid'); 
+        dinosaurs.forEach((dino) => {
+            let container = document.createElement('div'); 
+            
+            container.className = dino.species;
+            container.classList.add('grid-item'); 
+            container.innerHTML = `<h3>"${dino.species}"</h3>`; 
+            grid.appendChild(container);
+
+        })
         a.forEach(function(text){
-            let tile = document.createElement('div');
-            grid.appendChild(tile); 
-            tile.textContent = text; 
-            tile.setAttribute('class', 'grid-item')
+            let content = document.createElement('p');
+            //grid.appendChild(tile); 
+            content.textContent = text;  
+            let section = document.getElementBy
+
         })
 
         const humanTile = document.createElement('div'); 
         grid.appendChild(humanTile); 
-        humanTile.textContent = newHuman.name; 
+       // humanTile.textContent = newHuman.name; 
         humanTile.setAttribute('class', 'grid-item');
     }
 
@@ -168,7 +179,7 @@ document.getElementById('submit').addEventListener('click', function(event){
     event.preventDefault();
     human.getData();
     compare(dinosaurs, newHuman);
-    generateTiles(newTiles); 
+    generateTiles(newTiles, dinosaurs); 
     hideForm();
 
 })
