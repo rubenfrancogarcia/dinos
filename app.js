@@ -31,7 +31,7 @@
         let data = await res.json();
         //console.log(data);
         dinosaurs = data.Dinos.map(dino => Dino(dino.species, dino.weight, dino.height, dino.diet, dino.where, dino.when, dino.fact, dino.randomOutput))
-        console.log(dinosaurs); 
+        //console.log(dinosaurs); 
     }
     getDinoData(url);
 
@@ -58,7 +58,7 @@
         return {
             getData: function(){
           newHuman = Human(name, height, weight, diet);
-          console.log(newHuman);
+          //console.log(newHuman);
           return newHuman
             
             }
@@ -70,37 +70,41 @@
     const randomNumber = function getRandomInt(min, max) {
         min = Math.ceil(min);
         max = Math.floor(max);
-        console.log(Math.floor(Math.random() * (max - min) + min))
+        //console.log(Math.floor(Math.random() * (max - min) + min))
         return Math.floor(Math.random() * (max - min) + min); //The maximum is exclusive and the minimum is inclusive
       }
 
 //compare methods, weight is in lbs, height in inches 
     const compareMethods = [
-        {method: function(a,b){
-                if (a.weight > b.weight){
+        {method: function(dino,human){
+                let difference = dino.weight - human.weight;
+                let differenceHuman = human.weight - dino.weight;
+                if (dino.weight > human.weight){
                   
-                    return 'you weight more than this dinosaur'
+                    return `You weight ${difference} pounds less than the ${dino.species}.`
                 }
-                if(a.weight < b.weight){
-                    return 'you weight less than this dinosaur'
+                if(dino.weight < human.weight){
+                    return `You weight ${differenceHuman} pounds more than the ${dino.species}.`
                 }
                 else{
-                    return 'you both weight the same'
+                    return `You weight as much as a ${dino.species}.`
                 
                 }
               }, 
               type: "weight",
               metric: "pounds"
         },
-        {method: function(a,b){
-            if (a.height > b.height){
-                return 'you are taller than this dinosaur'
+        {method: function(dino,human){
+            dDifference = dino.height - human.height;
+            hDifference = human.height - dino.height
+            if (dino.height > human.height){
+                return `You are ${dDifference} inches taller than the ${dino.species}.`
             }
-            if(a.height < b.height){
-                return 'you are shorter than this dinosaur'
+            if(dino.height < human.height){
+                return `You are ${hDifference} inches taller than the ${dino.species}.`
             }
             else{
-                return 'you are as tall as this dinosaur'
+                return `You are as tall as a ${dino.species}.`
             }
          } ,
          type: 'height',
@@ -108,8 +112,8 @@
         }, 
     
         {
-        method: function(a,b){
-            return (a.diet == b.diet ?  'you and dino have same diet': 'you have different diets')
+        method: function(dino,human){
+            return (dino.diet == human.diet ?  `You both are ${human.diet}.`: `You are a ${human.diet} while the ${dino.species} is a ${dino.diet}.` )
             }, 
             type: 'diet'
         },   
@@ -117,11 +121,17 @@
     let newTiles; 
     function compare(a, human){
          newTiles = a.map(function(dino){
-            let rng = randomNumber(0, compareMethods.length);
-            let b = compareMethods[rng].method(dino, human);
-            return b
+             if(dino.randomOutput === false){
+                 return dino.fact
+             }
+             else{
+                let rng = randomNumber(0, compareMethods.length);
+                let b = compareMethods[rng].method(dino, human);
+                return b
+             }
+          
         })
-        console.log(newTiles)
+       // console.log(newTiles)
     }
 
     function generateTiles(a){
