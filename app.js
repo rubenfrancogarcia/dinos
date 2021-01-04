@@ -143,10 +143,10 @@
         const grid = document.getElementById('grid'); 
         dinosaurs.forEach((dino) => {
             let container = document.createElement('div'); 
-            
-            container.classList.add(dino.id)
             container.classList.add('grid-item'); 
-            container.innerHTML = `<h3>"${dino.species}"</h3>`; 
+            container.innerHTML = `<h3>"${dino.species}"</h3>
+            <img src='${dino.image}'/>
+            `; 
             grid.appendChild(container);
 
         })
