@@ -128,11 +128,14 @@
              else{
                 let rng = randomNumber(0, compareMethods.length);
                 let b = compareMethods[rng].method(dino, human);
+                console.log(b);   
                 return b
+                
              }
+             
           
         })
-       // console.log(newTiles)
+       console.log(newTiles)
     }
 
     function generateTiles(a, dinosaurs){
@@ -140,7 +143,7 @@
         dinosaurs.forEach((dino) => {
             let container = document.createElement('div'); 
             
-            container.className = dino.species;
+            container.classList.add(dino.id)
             container.classList.add('grid-item'); 
             container.innerHTML = `<h3>"${dino.species}"</h3>`; 
             grid.appendChild(container);
@@ -148,9 +151,7 @@
         })
         a.forEach(function(text){
             let content = document.createElement('p');
-            //grid.appendChild(tile); 
-            content.textContent = text;  
-            let section = document.getElementBy
+            content.textContent = text;              
 
         })
 
