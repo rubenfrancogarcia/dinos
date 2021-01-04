@@ -158,7 +158,10 @@
 
         const humanTile = document.createElement('div'); 
         grid.appendChild(humanTile); 
-       // humanTile.textContent = newHuman.name; 
+        
+       humanTile.innerHTML = `<h3>${newHuman.name}</h3>
+       <img src='${newHuman.image}'/>
+       `
         humanTile.setAttribute('class', 'grid-item');
     }
 
