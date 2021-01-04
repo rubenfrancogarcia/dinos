@@ -9,7 +9,8 @@
             where: where,
             when: when,
             fact: fact, 
-            randomOutput: randomOutput
+            randomOutput: randomOutput, 
+            image: `images/${species.toLowerCase()}.png`
         }
     }
     //created human constructor 
@@ -18,7 +19,8 @@
             name: name, 
             height: height,
             weight: weight,
-            diet: diet.toLowerCase()
+            diet: diet.toLowerCase(), 
+            image: "images/human.png"
         }
     }
 
