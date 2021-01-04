@@ -1,6 +1,6 @@
 
     // Create Dino Constructor
-    function Dino (species, weight, height, diet, where, when, fact, randomOutput, id){
+    function Dino (species, weight, height, diet, where, when, fact, randomOutput){
         return {
             species:species,
             weight: weight, 
@@ -9,8 +9,7 @@
             where: where,
             when: when,
             fact: fact, 
-            randomOutput: randomOutput,  
-            id: id   
+            randomOutput: randomOutput
         }
     }
     //created human constructor 
