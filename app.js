@@ -132,7 +132,6 @@
              else{
                 let rng = randomNumber(0, compareMethods.length);
                 let b = compareMethods[rng].method(dino, human);
-                console.log(b);
                 dino.tempInfo = b;   
                 return b  
              }
