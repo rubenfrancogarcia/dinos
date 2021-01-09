@@ -161,6 +161,7 @@
        <img src='${newHuman.image}'/>
        `
         humanTile.setAttribute('class', 'grid-item');
+        humanTile.classList.add('human');
     }
 
 function hideForm(){
