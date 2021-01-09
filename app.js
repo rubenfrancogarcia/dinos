@@ -10,7 +10,8 @@
             when: when,
             fact: fact, 
             randomOutput: randomOutput, 
-            image: `images/${species.toLowerCase()}.png`
+            image: `images/${species.toLowerCase()}.png`,
+            tempInfo: null
         }
     }
     //created human constructor 
@@ -120,41 +121,38 @@
             type: 'diet'
         },   
     ]
+
+    //this is the array I'm trying to mix in with the dino object
     let newTiles; 
-    function compare(a, human){
-         newTiles = a.map(function(dino){
+    function getTileComparisioinData(a, human){
+          a.forEach(function(dino){
              if(dino.randomOutput === false){
-                 return dino.fact
+                 dino.tempInfo = dino.fact 
              }
              else{
                 let rng = randomNumber(0, compareMethods.length);
                 let b = compareMethods[rng].method(dino, human);
-                console.log(b);   
-                return b
-                
+                console.log(b);
+                dino.tempInfo = b;   
+                return b  
              }
-             
-          
         })
-       console.log(newTiles)
+    
     }
 
-    function generateTiles(a, dinosaurs){
+    function generateTiles( dinosaurs){
         const grid = document.getElementById('grid'); 
         dinosaurs.forEach((dino) => {
             let container = document.createElement('div'); 
             container.classList.add('grid-item'); 
             container.innerHTML = `<h3>"${dino.species}"</h3>
             <img src='${dino.image}'/>
+            <p> ${dino.tempInfo}</p>
             `; 
             grid.appendChild(container);
 
         })
-        a.forEach(function(text){
-            let content = document.createElement('p');
-            content.textContent = text;              
-
-        })
+      
 
         const humanTile = document.createElement('div'); 
         grid.appendChild(humanTile); 
@@ -180,11 +178,12 @@ function hideForm(){
 // On button click, prepare and display infographic
 //use npx serve in root folder to  be able to run fetch on json file
 
+
 document.getElementById('submit').addEventListener('click', function(event){
     event.preventDefault();
     human.getData();
-    compare(dinosaurs, newHuman);
-    generateTiles(newTiles, dinosaurs); 
+    getTileComparisioinData(dinosaurs, newHuman);
+    generateTiles(dinosaurs); 
     hideForm();
 
 })
