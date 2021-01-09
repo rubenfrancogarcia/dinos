@@ -25,6 +25,16 @@
         }
     }
 
+    //created validation constructor 
+    function FormData (name, feet, inches, weight){
+        return {
+            name: name, 
+            feet: feet, 
+            inches: inches, 
+            weight: weight
+        }
+    }
+
     // Create Dino Objects
     let url = "http://localhost:5000/dino.json";
     let dinosaurs;
@@ -40,7 +50,11 @@
 
     // Create Human Object
     // Use IIFE to get human data from form 
+
+
+
     let newHuman; 
+    let validationData; 
     const human = (function (){
     let name; 
     let feet;
@@ -49,21 +63,28 @@
     let height;
     let diet;
         document.getElementById('submit').addEventListener('click', function(event){
-            event.preventDefault();
+            event.preventDefault()
             const form = document.querySelector('form');
-            name = form.elements.name.value; 
-            feet = Number(form.elements.feet.value); 
-            inches = Number(form.elements.inches.value);
-            weight = Number(form.elements.weight.value); 
+            name = form.elements.name.value ; 
+            feet = (form.elements.feet.value === ""? null :  Number(form.elements.feet.value)) ; 
+            inches = (form.elements.inches.value === ""? null :  Number(form.elements.inches.value)) ;
+            weight =  (form.elements.weight.value === ""? null :  Number(form.elements.weight.value)) ; 
             diet = form.elements.diet.value;
             height = inches + (feet * 12);
         })
         return {
             getData: function(){
           newHuman = Human(name, height, weight, diet);
-          //console.log(newHuman);
+          console.log(newHuman);
+          console.log(feet)
+                console.log(inches)
+                console.log(height)
           return newHuman
             
+            },
+            formValidationValues: function(){
+                validationData = FormData(name, feet, inches, weight);
+                return validationData
             }
         }
     })();
@@ -169,6 +190,15 @@ function hideForm(){
     form.setAttribute("class", "hidden");
 }    
 
+function isformValidation(data){
+    if((data.feet === false ) && (data.inches === false) && (data.weight === false) && (data.name.length === false)){
+        return false
+    }{
+        return true
+    }
+    
+}
+
     // Generate Tiles for each Dino in Array
   
         // Add tiles to DOM
@@ -180,13 +210,22 @@ function hideForm(){
 //use npx serve in root folder to  be able to run fetch on json file
 
 
+
+
 document.getElementById('submit').addEventListener('click', function(event){
-    event.preventDefault();
-    human.getData();
-    getTileComparisioinData(dinosaurs, newHuman);
-    generateTiles(dinosaurs); 
-    hideForm();
+    human.formValidationValues();
+    if (isformValidation(validationData) === false){
+        event.preventDefault();
+        getTileComparisioinData(dinosaurs, newHuman);
+        generateTiles(dinosaurs); 
+        hideForm();
+    }
+    {
+        //alert('Plese fill out all sections of the form')
+        console.log('fill out form')
+    }
 
 })
+
 
 
